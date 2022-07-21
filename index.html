@@ -4,12 +4,67 @@
 <style>
 h2 {text-align: center;}
 
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
 </style>
 </head>
 <body>
 
 <h2>Howdy!</h2>
-<img src="img/Picture1.jpg" alt="Trulli" width="500" height="333">
+<div class="row">
+  <div class="column">
+    <img src="./img/memecat.webp" alt="Snow" style="width:100%" width="500" height="333">
+    <figcaption>The polite cat</figcaption>
+  </div>
+  <div class="column">
+    <img src="./img/Picture1.jpg" alt="Forest" style="width:100%" width="500" height="333">
+    <figcaption>Me cosplayed the polite cat</figcaption>
+  </div>
+  <div class="column">
+    <img src="./img/IMG_1382.jpg" alt="Mountains" style="width:100%" width="500" height="333">
+    <figcaption>Me at Grand Canyon</figcaption>
+  </div>
+</div>
+
+<div>
+  <p> &#9995 &#128539</p>
+  <p>
+    My name is Yuhong (Jesse) Li and I'm currently an ECE Ph.D student in the University of Illinois Urbana-Champaign 
+    advised by <a href="https://dchen.ece.illinois.edu/" >Prof. Deming Chen</a>. 
+    I'm interested in <a href="https://scholar.google.com/citations?user=Qh-6mV8AAAAJ&hl=en" >Efficient Machine Learning</a>. Please feel free to contact me via email (leeyh at illinois dot edu)
+    
+    <p>Besides research,
+      I like workout, cycling and playing some random games
+       (checkout my <a href="https://www.youtube.com/channel/UCZpXb6Yie_NTfk-6TGtVFpg">youtube channel</a>)!</p>
+  </p>
+</div>
+<div>
+    <p style="color:green;"><strong> &#129311 Latest Updates</strong></p>
+    <p> [2022.5] I started my internship in Microsoft Research Redmond advised by <a href="https://www.debadeepta.com/">Dr. Debadeepta Dey</a>!</p>
+    <p> [2021.12] Our paper got accepted by NeurIPS! Checkout the 
+      [<a href="https://github.com/leeyeehoo/GenNAS">project</a>]
+      [<a href="https://proceedings.neurips.cc/paper/2021/file/aba53da2f6340a8b89dc96d09d0d0430-Paper.pdf">paper</a>]
+      [<a href="https://slideslive.com/38967627/generic-neural-architecture-search-via-regression?ref=recommended">presentation</a>]
+     </p>
+  <p>
+
+  </p>
+</div>
 
 </body>
 </html>
