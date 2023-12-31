@@ -1,51 +1,121 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Jesse's page</title>
-<style>
-h2 {text-align: center;}
+  <title>Jesse's page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
 
-* {
-  box-sizing: border-box;
+h2 {
+    text-align: center;
+    color: #333333;
+    font-family: 'Helvetica', sans-serif;
+}
+
+.row {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    align-items: stretch; /* Ensure that the items align vertically */
 }
 
 .column {
-  float: left;
-  width: 33.33%;
-  padding: 5px;
+    flex: 0 0 auto; /* This ensures that the column does not grow or shrink */
+    display: flex; /* Use flexbox for vertical alignment */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center-align the items horizontally */
+    margin-right: 10px; /* Adjust the space between columns */
 }
 
-/* Clearfix (clear floats) */
-.row::after {
-  content: "";
-  clear: both;
-  display: table;
+.column img {
+    width: 200px; /* Specify a fixed width for all images */
+    height: auto; /* Allow the height to be automatic */
+    object-fit: contain; /* This will make sure the image fits within the frame without cropping */
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 8px; /* Space between image and caption */
 }
 
-</style>
+figcaption {
+    text-align: center;
+    color: #666666;
+    font-size: 0.9em;
+    overflow: hidden; /* Prevent text from spilling over */
+    white-space: nowrap; /* Keep the caption in a single line */
+    text-overflow: ellipsis; /* Add an ellipsis if the caption is too long */
+    max-width: 200px; /* Ensure the caption is no wider than the image */
+}
+
+@media (max-width: 600px) {
+    .row {
+        flex-wrap: wrap;
+    }
+    .column {
+        width: 100%; /* On small screens, each column takes full width */
+        margin-right: 0; /* Remove the margin on small screens */
+    }
+}
+.social-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px; /* Space between icons */
+    }
+
+    .social-links a {
+      color: #333;
+      text-decoration: none;
+    }
+
+    .social-links a:hover {
+      color: #0077cc;
+    }
+
+    .social-links i {
+      font-size: 24px; /* Size of the icons */
+    }
+    </style>
 </head>
 <body>
+    <!-- Content -->
+</body>
+</html>
 
-<h2>Howdy!</h2>
+
+<h2>
+  Howdy!🐄🐄🐄🐄🐄🐄🐄🐄🐄🐄🐄🐄🐄🐄🐄🐄🐄🐄🐄🐄🐄🐄
+  <span class="social-links">
+    <a href="https://scholar.google.com/citations?user=Qh-6mV8AAAAJ&hl=en" target="_blank" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+    <a href="https://github.com/leeyeehoo" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/yuhong-li-096150137/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+  </span>
+</h2>
 <div class="row">
   <div class="column">
-    <img src="./img/memecat.webp" alt="Snow" style="width:100%" width="500" height="333">
+    <img src="./img/memecat.webp" alt="The polite cat">
     <figcaption>The polite cat</figcaption>
   </div>
   <div class="column">
-    <img src="./img/Picture1.jpg" alt="Forest" style="width:100%" width="500" height="333">
-    <figcaption>Me cosplayed the <a href="https://youtu.be/5WrHZPo-UX8?si=DzOZqDTRwpKeCc5c" >the polite cat</a></figcaption>
+    <img src="./img/Picture1.jpg" alt="Me cosplayed the polite cat">
+    <figcaption>Me cosplayed the <a href="https://youtu.be/5WrHZPo-UX8?si=DzOZqDTRwpKeCc5c">the polite cat</a></figcaption>
   </div>
   <div class="column">
-    <img src="./img/IMG_1382.jpg" alt="Mountains" style="width:100%" width="500" height="333">
+    <img src="./img/IMG_1382.jpg" alt="Me at Grand Canyon">
     <figcaption>Me at Grand Canyon</figcaption>
   </div>
   <div class="column">
-    <img src="./img/IMG_4320.JPG" alt="Maple" style="width:100%" width="500" height="333">
+    <img src="./img/IMG_4320.JPG" alt="Me at Northern MI">
     <figcaption>Me at Northern MI</figcaption>
   </div>
   <div class="column">
-    <img src="./img/Mahjong.jpg" alt="Maple" style="width:100%" width="500" height="333">
+    <img src="./img/Mahjong.jpg" alt="Me playing Mahjong">
     <figcaption>Me playing Mahjong</figcaption>
   </div>
 </div>
@@ -53,9 +123,9 @@ h2 {text-align: center;}
 <div>
   <p> &#9995 &#128539</p>
   <p>
-    My name is Yuhong (Jesse) Li and I'm currently an ECE Ph.D student in the University of Illinois Urbana-Champaign 
+    My name is Yuhong (Jesse: unofficial, usually in Discord) Li and I'm currently an ECE Ph.D student in the University of Illinois Urbana-Champaign 
     advised by <a href="https://dchen.ece.illinois.edu/" >Prof. Deming Chen</a>. Before that, I obtained my Bachelor's Degree and spend 4 wonderful years in Beijing University of Posts and Telecommunications (BUPT).
-    I'm interested in <a href="https://scholar.google.com/citations?user=Qh-6mV8AAAAJ&hl=en" >Efficient Machine Learning</a>. Please feel free to contact me via email (leeyh at illinois dot edu)
+    I'm interested in Efficient Machine Learning. Please feel free to contact me via email (leeyh at illinois dot edu)
     
     <p>Besides research,
       I like workout, cycling and playing some random games
@@ -64,14 +134,10 @@ h2 {text-align: center;}
 </div>
 <div>
     <p style="color:green;"><strong> &#129311 Latest Updates</strong></p>
-    <p> [2023.7] One paper got accepted by ICCV 2023!</p>
-    <p> [2023.1] I'll be a <a href="https://courses.grainger.illinois.edu/ece479/sp2023/">ECE 479</a> TA for Spring semester, 2023!</p>
+    <p> [2023.?] 🐍🦙???
+    <p> [2023.7] <a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Li_Extensible_and_Efficient_Proxy_for_Neural_Architecture_Search_ICCV_2023_paper.pdf">Extensible and Efficient Proxy for Neural Architecture Search</a> got accepted by ICCV 2023!</p>
     <p> [2023.1] <a href="https://arxiv.org/abs/2210.09298">What Makes Convolutional Models Great on Long Sequence Modeling?</a> has been accepted by ICLR 2023! [<a href="https://github.com/ctlllll/SGConv">project</a>]</p>
-    <p> [2022.9] I'm serving the <a href="https://pure.engr.illinois.edu/">PURE</a> program as the mentor for Fall semester, 2022!</p>
-    <p> [2022.8] I'm maintaining a project named <a href="https://github.com/leeyeehoo/GenNAS-Zero">GenNAS-Zero</a>, which includes GenNAS and some interesting new ideas!</p>
-    <p> [2022.8] I will be a <a href="https://memegenerator.net/img/instances/37457918/i-volunteer-as-teaching-assistant.jpg">TA</a> for <a href="https://courses.engr.illinois.edu/ece110/fa2021/content/images/course/OhmLawCartoon.png">ECE 110</a> this fall! Hope I can be nice and helpful! &#128104</p>
-    <p> [2022.5] I started my internship in Microsoft Research Redmond advised by <a href="https://www.debadeepta.com/">Dr. Debadeepta Dey</a>!</p>
-    <p> [2021.12] Our paper got accepted by NeurIPS! Checkout the 
+    <p> [2021.12] Generic Neural Architecture Search via Regression got accepted by NeurIPS! Checkout the 
       [<a href="https://github.com/leeyeehoo/GenNAS">project</a>]
       [<a href="https://proceedings.neurips.cc/paper/2021/file/aba53da2f6340a8b89dc96d09d0d0430-Paper.pdf">paper</a>]
       [<a href="https://slideslive.com/38967627/generic-neural-architecture-search-via-regression?ref=recommended">presentation</a>]
@@ -82,7 +148,7 @@ h2 {text-align: center;}
 </div>
 <div>
   <p style="color:green;"><strong> &#129312 Misc.</strong></p>
-  <p>Coming soon!</p>
+  <p>My mom forced me to learn violin when I was 3 🎻.</p>
 </div>
 </body>
 </html>
