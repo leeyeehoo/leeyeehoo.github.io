@@ -102,13 +102,30 @@
           update();
         }
       });
-      item.addEventListener('touchstart', (e) => {
-        e.preventDefault();
+      
+      // Touch handling for mobile - don't prevent default to allow clicks
+      item.addEventListener('touchstart', () => {
         if (i !== idx) {
           idx = i;
           update();
         }
-      }, { passive: false });
+      }, { passive: true });
+      
+      // Additional mobile touch optimization
+      item.addEventListener('touchend', (e) => {
+        // Ensure the link is activated on touchend for better mobile UX
+        const link = item.querySelector('a');
+        if (link && i === idx) {
+          // Small delay to allow highlight to be visible before navigation
+          setTimeout(() => {
+            if (link.href.startsWith('http')) {
+              window.open(link.href, link.target || '_self');
+            } else {
+              window.location.href = link.href;
+            }
+          }, 50);
+        }
+      }, { passive: true });
     });
     update();
     document.addEventListener('keydown', (e) => {
