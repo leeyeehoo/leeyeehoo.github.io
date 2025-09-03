@@ -1,172 +1,177 @@
+<!-- index.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Jesse's page</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <meta charset="UTF-8" />
+  <title>yuhong li — console</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Yuhong Li - Personal console interface with links to Google Scholar, LinkedIn, GitHub, and more." />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://leeyeehoo.github.io/" />
+  <meta property="og:title" content="yuhong li — console" />
+  <meta property="og:description" content="Personal console interface with links to Google Scholar, LinkedIn, GitHub, and more." />
+  <meta property="og:image" content="https://leeyeehoo.github.io/assets/icons/thumbnail.svg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/svg+xml" />
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://leeyeehoo.github.io/" />
+  <meta property="twitter:title" content="yuhong li — console" />
+  <meta property="twitter:description" content="Personal console interface with links to Google Scholar, LinkedIn, GitHub, and more." />
+  <meta property="twitter:image" content="https://leeyeehoo.github.io/assets/icons/thumbnail.svg" />
+  
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/icons/favicon-16x16.svg">
+  <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/icons/favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.svg">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="shortcut icon" href="assets/icons/favicon.svg">
   <style>
-  body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    margin: 0;
-    padding: 0;
-}
-
-h2 {
-    text-align: center;
-    color: #333333;
-    font-family: 'Helvetica', sans-serif;
-}
-
-.row {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    align-items: stretch; /* Ensure that the items align vertically */
-}
-
-.column {
-    flex: 0 0 auto; /* This ensures that the column does not grow or shrink */
-    display: flex; /* Use flexbox for vertical alignment */
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center-align the items horizontally */
-    margin-right: 10px; /* Adjust the space between columns */
-}
-
-.column img {
-    width: 200px; /* Specify a fixed width for all images */
-    height: auto; /* Allow the height to be automatic */
-    object-fit: contain; /* This will make sure the image fits within the frame without cropping */
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    margin-bottom: 8px; /* Space between image and caption */
-}
-
-figcaption {
-    text-align: center;
-    color: #666666;
-    font-size: 0.9em;
-    overflow: hidden; /* Prevent text from spilling over */
-    white-space: nowrap; /* Keep the caption in a single line */
-    text-overflow: ellipsis; /* Add an ellipsis if the caption is too long */
-    max-width: 200px; /* Ensure the caption is no wider than the image */
-}
-
-@media (max-width: 600px) {
-    .row {
-        flex-wrap: wrap;
+    :root{
+      --bg:#0b0f10;        /* deeper neon bg */
+      --panel:#111518;     /* panel/dim line */
+      --fg:#39ff14;        /* neon green */
+      --fg-dim:#9cff6b;    /* neon dim */
     }
-    .column {
-        width: 100%; /* On small screens, each column takes full width */
-        margin-right: 0; /* Remove the margin on small screens */
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: Consolas, monospace;
     }
-}
-.social-links {
+    .wrap {
+      padding: 12px 14px 24px;
+      max-width: 900px;
+    }
+    /* Header / title line with thumb */
+    .hdr {
       display: flex;
-      justify-content: center;
       align-items: center;
-      gap: 10px; /* Space between icons */
+      gap: 10px;
+      margin-bottom: 10px;
+      user-select: none;
     }
-
-    .social-links a {
-      color: #333;
+    .thumb {
+      width: 28px; height: 28px;
+      border-radius: 4px;
+      background: var(--panel);
+      border: 1px solid var(--fg);
+      display: grid; place-items: center;
+      font-weight: 700; font-size: 14px; line-height: 1;
+      color: var(--fg);
+    }
+    .title {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .hint {
+      color: var(--fg);
+      font-size: 12px;
+      margin: 4px 0 12px;
+    }
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      max-width: 96vw;
+    }
+    .item {
+      padding: 4px 8px;
+      border-left: 3px solid transparent;
+      cursor: default;
+      outline: none;
+    }
+    .item a {
+      color: inherit;
       text-decoration: none;
     }
-
-    .social-links a:hover {
-      color: #0077cc;
+    .item.selected {
+      background: var(--fg);
+      color: var(--bg);
+      border-left-color: var(--bg);
     }
-
-    .social-links i {
-      font-size: 24px; /* Size of the icons */
+    .divider {
+      height: 1px; background: var(--panel); margin: 8px 0 6px;
     }
-    .footnote {
-      text-align: center;
-      font-size: 0.8em;
-      margin-top: 50px; /* Adjust the space above the footnote */
-      color: #666;
+    @media (max-width:600px){
+      .wrap { padding: 10px; }
+      .item { padding: 6px 8px; }
+      .hint { font-size: 11px; }
     }
-    </style>
+  </style>
 </head>
 <body>
-    <!-- Content -->
+  <div class="wrap">
+    <div class="hdr">
+      <div class="thumb" aria-hidden="true">YL</div>
+      <div class="title" id="headline">Yuhong Li [Version loading…]</div>
+    </div>
+    <div class="hint">↑/↓ to select • Enter to open</div>
+    <div class="divider"></div>
+
+    <div class="menu" id="menu" role="listbox" aria-label="Console links">
+      <div class="item selected" role="option" aria-selected="true">
+        <a href="https://scholar.google.com/citations?user=Qh-6mV8AAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+      </div>
+      <div class="item" role="option" aria-selected="false">
+        <a href="https://www.linkedin.com/in/yuhong-li-096150137/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <div class="item" role="option" aria-selected="false">
+        <a href="https://github.com/leeyeehoo" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <div class="item" role="option" aria-selected="false">
+        <a href="https://x.com/yli3521" target="_blank" rel="noopener">Twitter</a>
+      </div>
+      <div class="item" role="option" aria-selected="false">
+        <a href="misc.html">Misc</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- Headline: yuhong li [version $CURRENT_BITCOIN_BLOCK] ---
+    (function setHeadline() {
+      const el = document.getElementById('headline');
+      const set = (h) => el.textContent = `Yuhong Li [Version ${h}]`;
+      // Try mempool.space first, then blockchain.info
+      fetch('https://mempool.space/api/blocks/tip/height', {cache:'no-store'})
+        .then(r => r.ok ? r.text() : Promise.reject())
+        .then(set)
+        .catch(() => fetch('https://blockchain.info/q/getblockcount', {cache:'no-store'})
+          .then(r => r.ok ? r.text() : Promise.reject())
+          .then(set)
+          .catch(() => set('unavailable')));
+    })();
+
+    // --- Keyboard navigation ---
+    const items = Array.from(document.querySelectorAll('.item'));
+    let idx = 0;
+    const update = () => {
+      items.forEach((it, i) => {
+        it.classList.toggle('selected', i === idx);
+        it.setAttribute('aria-selected', i === idx ? 'true' : 'false');
+      });
+    };
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown') {
+        idx = (idx + 1) % items.length;
+        update();
+      } else if (e.key === 'ArrowUp') {
+        idx = (idx - 1 + items.length) % items.length;
+        update();
+      } else if (e.key === 'Enter') {
+        const a = items[idx].querySelector('a');
+        if (a) a.click();
+      }
+    });
+  </script>
 </body>
 </html>
-
-
-<h2>
-  Howdy!🐄🐄🐄🐄🐄🐄🐄🐄🐄🐄🐄🐄🐄🐄🐄🐄🐄🐄🐄🐄🐄🐄
-  <span class="social-links">
-    <a href="https://scholar.google.com/citations?user=Qh-6mV8AAAAJ&hl=en" target="_blank" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
-    <a href="https://github.com/leeyeehoo" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-    <a href="https://www.linkedin.com/in/yuhong-li-096150137/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-  </span>
-</h2>
-<div class="row">
-  <div class="column">
-    <img src="./img/memecat.webp" alt="The polite cat">
-    <figcaption>The polite cat</figcaption>
-  </div>
-  <div class="column">
-    <img src="./img/Picture1.jpg" alt="Me cosplayed the polite cat">
-    <figcaption>Me cosplayed <a href="https://youtu.be/5WrHZPo-UX8?si=DzOZqDTRwpKeCc5c">👈</a></figcaption>
-  </div>
-  <div class="column">
-    <img src="./img/IMG_1382.jpg" alt="Me at Grand Canyon">
-    <figcaption>Me @ Grand Canyon</figcaption>
-  </div>
-  <div class="column">
-    <img src="./img/IMG_4320.JPG" alt="Me at Northern MI">
-    <figcaption>Me @ Northern MI</figcaption>
-  </div>
-  <div class="column">
-    <img src="./img/Mahjong.jpg" alt="Me playing Mahjong">
-    <figcaption>Me playing Mahjong</figcaption>
-  </div>
-  <div class="column">
-    <img src="./img/IMG_2565.JPG" alt="Me at DFW">
-    <figcaption>Me @ DFW</figcaption>
-  </div>
-</div>
-
-<div>
-  <p> &#9995 &#128539</p>
-  <p>
-    My name is Yuhong (Jesse: unofficial, usually in Discord) Li and I'm currently an ECE Ph.D. student @ the University of Illinois Urbana-Champaign 
-    advised by <a href="https://dchen.ece.illinois.edu/" >Prof. Deming Chen</a>. Before that, I obtained my Bachelor's Degree and spent 4 wonderful years in Beijing University of Posts and Telecommunications (BUPT).
-    I'm interested in Efficient Machine Learning. Please feel free to contact me via email (LeEyH at iLlinOis dot edu)
-    
-    <p>Besides research,
-      I like workout, cycling and playing some random games
-       (checkout my <a href="https://www.youtube.com/channel/UCZpXb6Yie_NTfk-6TGtVFpg">youtube channel</a>)!</p>
-  </p>
-</div>
-<div>
-    <p style="color:green;"><strong> &#129311 Latest Updates</strong></p>
-    <p> [2024.?] &#128247&#128247&#128247 ???</p>
-    <p> [2024.1] <a href="https://github.com/FasterDecoding/Medusa"> Medusa: Simple Framework for Accelerating LLM Generation with Multiple Decoding Heads</a></p>
-    <p> [2023.7] <a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Li_Extensible_and_Efficient_Proxy_for_Neural_Architecture_Search_ICCV_2023_paper.pdf">Extensible and Efficient Proxy for Neural Architecture Search</a> got accepted by ICCV 2023!</p>
-    <p> [2023.1] <a href="https://arxiv.org/abs/2210.09298">What Makes Convolutional Models Great on Long Sequence Modeling?</a> has been accepted by ICLR 2023! [<a href="https://github.com/ctlllll/SGConv">project</a>]</p>
-    <p> [2021.12] Generic Neural Architecture Search via Regression got accepted by NeurIPS! Checkout the 
-      [<a href="https://github.com/leeyeehoo/GenNAS">project</a>]
-      [<a href="https://proceedings.neurips.cc/paper/2021/file/aba53da2f6340a8b89dc96d09d0d0430-Paper.pdf">paper</a>]
-      [<a href="https://slideslive.com/38967627/generic-neural-architecture-search-via-regression?ref=recommended">presentation</a>]
-     </p>
-  <p>
-
-  </p>
-</div>
-<div>
-  <p style="color:green;"><strong> &#129312 Misc.</strong></p>
-  <p>I managed to lose ~30lbs in 2023 📉.</p>
-  <p>My mom forced me to learn violin when I was 3 🎻.</p>
-</div>
-<!-- Footnote -->
-<div class="footnote">
-  <p>© 2023 Y. Li X ChatGPT. All rights reserved.</p>
-</div>
-
-</body>
-</html>
-

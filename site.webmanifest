@@ -1,0 +1,19 @@
+{
+    "name": "yuhong li — console",
+    "short_name": "YL Console",
+    "icons": [
+        {
+            "src": "assets/icons/favicon.svg",
+            "sizes": "32x32",
+            "type": "image/svg+xml"
+        },
+        {
+            "src": "assets/icons/apple-touch-icon.svg",
+            "sizes": "180x180",
+            "type": "image/svg+xml"
+        }
+    ],
+    "theme_color": "#a6e22e",
+    "background_color": "#1e1e1e",
+    "display": "standalone"
+}

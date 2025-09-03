@@ -1,0 +1,69 @@
+<!-- games/slot-machine/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Slot Machine — console</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="A tiny terminal-styled 3-reel slot machine game with pixel fruits." />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://leeyeehoo.github.io/games/slot-machine/" />
+  <meta property="og:title" content="Slot Machine — console" />
+  <meta property="og:description" content="A tiny terminal-styled 3-reel slot machine game with pixel fruits." />
+  <meta property="og:image" content="https://leeyeehoo.github.io/assets/icons/thumbnail.svg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/svg+xml" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://leeyeehoo.github.io/games/slot-machine/" />
+  <meta property="twitter:title" content="Slot Machine — console" />
+  <meta property="twitter:description" content="A tiny terminal-styled 3-reel slot machine game with pixel fruits." />
+  <meta property="twitter:image" content="https://leeyeehoo.github.io/assets/icons/thumbnail.svg" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="../../assets/icons/favicon.svg">
+  <link rel="icon" type="image/svg+xml" sizes="16x16" href="../../assets/icons/favicon-16x16.svg">
+  <link rel="icon" type="image/svg+xml" sizes="32x32" href="../../assets/icons/favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../assets/icons/apple-touch-icon.svg">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="shortcut icon" href="../../assets/icons/favicon.svg">
+
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <div class="hdr">
+      <div class="thumb" aria-hidden="true">YL</div>
+      <div class="title">Slot Machine</div>
+    </div>
+    <div class="hint">Press <strong>B</strong> or <strong>Backspace</strong> to return • <a href="../../misc.html">← back to misc</a></div>
+    <div class="divider"></div>
+
+    <div class="game" role="application" aria-label="Slot machine game">
+      <div class="machine" aria-label="Machine frame">
+        <div class="reels" aria-live="polite">
+          <canvas class="reel" width="64" height="64" aria-label="Reel 1"></canvas>
+          <canvas class="reel" width="64" height="64" aria-label="Reel 2"></canvas>
+          <canvas class="reel" width="64" height="64" aria-label="Reel 3"></canvas>
+        </div>
+        <div class="panel">
+          <div class="credit" id="credit" aria-live="polite">credit: 10</div>
+          <div class="controls">
+            <button id="spinBtn" class="btn" type="button" aria-keyshortcuts="Space Enter">Spin</button>
+            <button id="restartBtn" class="btn" type="button" aria-keyshortcuts="KeyR">Restart</button>
+          </div>
+          <div id="status" class="status" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
+
+

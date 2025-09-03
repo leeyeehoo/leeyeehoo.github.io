@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+  <rect width="180" height="180" fill="#1e1e1e"/>
+  <rect x="15" y="15" width="150" height="150" rx="15" fill="#2a2a2a" stroke="#a6e22e" stroke-width="4"/>
+  <text x="90" y="105" dominant-baseline="middle" text-anchor="middle"
+        font-family="Consolas, monospace" font-size="48" fill="#a6e22e" font-weight="bold">YL</text>
+</svg>

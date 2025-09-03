@@ -1,0 +1,214 @@
+<!-- misc.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Misc — console</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Yuhong Li - Miscellaneous projects and experiments from the console interface." />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://leeyeehoo.github.io/misc.html" />
+  <meta property="og:title" content="Misc — console" />
+  <meta property="og:description" content="Miscellaneous projects and experiments from Yuhong Li's console interface." />
+  <meta property="og:image" content="https://leeyeehoo.github.io/assets/icons/thumbnail.svg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/svg+xml" />
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://leeyeehoo.github.io/misc.html" />
+  <meta property="twitter:title" content="Misc — console" />
+  <meta property="twitter:description" content="Miscellaneous projects and experiments from Yuhong Li's console interface." />
+  <meta property="twitter:image" content="https://leeyeehoo.github.io/assets/icons/thumbnail.svg" />
+  
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/icons/favicon-16x16.svg">
+  <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/icons/favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.svg">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="shortcut icon" href="assets/icons/favicon.svg">
+  <style>
+    :root{
+      --bg:#0b0f10; --panel:#111518; --fg:#39ff14; --fg-dim:#9cff6b;
+    }
+    * { box-sizing:border-box; }
+    html, body { margin:0; padding:0; background:var(--bg); color:var(--fg); font-family:Consolas, monospace; }
+    .wrap { padding:12px 14px 24px; max-width:900px; }
+    .hdr { display:flex; align-items:center; gap:10px; margin-bottom:10px; user-select:none; }
+    .thumb { width:28px; height:28px; border-radius:4px; background:var(--panel); border:1px solid var(--fg);
+      display:grid; place-items:center; font-weight:700; font-size:14px; color:var(--fg); }
+    .title { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .hint { color:var(--fg); font-size:12px; margin:4px 0 12px; }
+    .divider { height:1px; background:var(--panel); margin:8px 0 6px; }
+    a { color:inherit; text-decoration:none; }
+    .menu { display:flex; flex-direction:column; gap:2px; max-width:96vw; }
+    .item { padding:4px 8px; border-left:3px solid transparent; cursor:default; outline:none; }
+    .item a { color:inherit; text-decoration:none; }
+    .item.selected { background:var(--fg); color:var(--bg); border-left-color:var(--bg); }
+    /* Gallery */
+    .section { margin-top:18px; }
+    .section-title { font-weight:700; margin-bottom:6px; }
+    .canvas-box { background:var(--bg); border:1px solid var(--fg); border-radius:4px; padding:8px; }
+    #pxCanvas { width:100%; max-width:860px; height:auto; display:block; background:var(--bg); }
+    .controls { display:flex; gap:8px; align-items:center; margin:8px 0 2px; }
+    .btn { background:transparent; color:var(--fg); border:1px solid var(--fg); padding:4px 8px; border-radius:4px; cursor:pointer; font-family:inherit; }
+    .hint2 { color:var(--fg); font-size:11px; opacity:.9; }
+    @media (max-width:600px){ .wrap{padding:10px;} .item{padding:6px 8px;} .hint{font-size:11px;} }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hdr">
+      <div class="thumb">YL</div>
+      <div class="title">Misc</div>
+    </div>
+    <div class="hint">↑/↓ to select • Enter to open</div>
+    <div class="divider"></div>
+
+    <div class="menu" id="menu" role="listbox" aria-label="Misc menu">
+      <div class="item selected" role="option" aria-selected="true">
+        <a href="games/slot-machine/index.html">Arcade</a>
+      </div>
+      <div class="item" role="option" aria-selected="false">
+        <a href="games/gallery/index.html">Gallery</a>
+      </div>
+      <div class="item" role="option" aria-selected="false">
+        <a href="index.html">Back</a>
+      </div>
+    </div>
+
+    <!-- Gallery moved to gallery.html -->
+  </div>
+
+  <script>
+    // Keyboard navigation (same behavior as index)
+    const items = Array.from(document.querySelectorAll('.item'));
+    let idx = 0;
+    const update = () => {
+      items.forEach((it, i) => {
+        it.classList.toggle('selected', i === idx);
+        it.setAttribute('aria-selected', i === idx ? 'true' : 'false');
+      });
+    };
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown') { idx = (idx + 1) % items.length; update(); }
+      else if (e.key === 'ArrowUp') { idx = (idx - 1 + items.length) % items.length; update(); }
+      else if (e.key === 'Enter') {
+        const a = items[idx].querySelector('a'); if (a) a.click();
+      }
+    });
+
+    // --- Gallery: pixelize non-color with scan animation ---
+    (function gallery(){
+      const canvas = document.getElementById('pxCanvas');
+      const ctx = canvas.getContext('2d');
+      const drop = document.getElementById('drop');
+      const pickBtn = document.getElementById('pick');
+      const fileInput = document.getElementById('file');
+      const renderBtn = document.getElementById('render');
+      const rescanBtn = document.getElementById('rescan');
+      const urlInput = document.getElementById('imgUrl');
+
+      const fg = getVar('--fg', '#39ff14');
+      const bg = getVar('--bg', '#0b0f10');
+
+      function getVar(name, fallback){
+        const v = getComputedStyle(document.documentElement).getPropertyValue(name);
+        return v && v.trim() ? v.trim() : fallback;
+      }
+
+      function resize(){
+        const ratio = window.devicePixelRatio || 1;
+        const rect = canvas.getBoundingClientRect();
+        const w = Math.floor(rect.width * ratio);
+        const h = Math.floor(rect.height * ratio);
+        if (canvas.width !== w || canvas.height !== h){ canvas.width = w; canvas.height = h; }
+        ctx.setTransform(ratio,0,0,ratio,0,0);
+      }
+      new ResizeObserver(resize).observe(canvas);
+      resize();
+
+      // Ordered dithering (Bayer 8x8)
+      const BAYER = [
+        [0,48,12,60,3,51,15,63],
+        [32,16,44,28,35,19,47,31],
+        [8,56,4,52,11,59,7,55],
+        [40,24,36,20,43,27,39,23],
+        [2,50,14,62,1,49,13,61],
+        [34,18,46,30,33,17,45,29],
+        [10,58,6,54,9,57,5,53],
+        [42,26,38,22,41,25,37,21]
+      ];
+
+      function toMonoPixels(img){
+        const maxW = canvas.width; const maxH = canvas.height;
+        const scale = Math.min(maxW / img.width, maxH / img.height);
+        const w = Math.max(64, Math.floor(img.width * scale));
+        const h = Math.max(64, Math.floor(img.height * scale));
+        const off = document.createElement('canvas'); off.width = w; off.height = h;
+        const ox = off.getContext('2d');
+        ox.drawImage(img, 0, 0, w, h);
+        const data = ox.getImageData(0, 0, w, h);
+        const out = new Uint8Array(w*h);
+        for (let y=0; y<h; y++){
+          for (let x=0; x<w; x++){
+            const i = (y*w + x) * 4; const r=data.data[i], g=data.data[i+1], b=data.data[i+2];
+            const lum = (0.299*r + 0.587*g + 0.114*b) / 255; // 0..1
+            const t = (BAYER[y&7][x&7]+0.5)/64; // 0..1
+            out[y*w + x] = lum < t ? 1 : 0; // 1-bit
+          }
+        }
+        return {w,h,mask:out};
+      }
+
+      function scanDraw(pix){
+        ctx.fillStyle = bg; ctx.fillRect(0,0,canvas.width,canvas.height);
+        const cellX = Math.max(1, Math.floor(canvas.width / pix.w));
+        const cellY = Math.max(1, Math.floor(canvas.height / pix.h));
+        const dx = Math.floor((canvas.width - pix.w*cellX)/2);
+        const dy = Math.floor((canvas.height - pix.h*cellY)/2);
+        let row = 0;
+        function step(){
+          const start = performance.now();
+          while (row < pix.h && performance.now() - start < 16){
+            for (let x=0; x<pix.w; x++){
+              if (pix.mask[row*pix.w + x]){
+                ctx.fillStyle = fg;
+                ctx.fillRect(dx + x*cellX, dy + row*cellY, cellX, cellY);
+              }
+            }
+            // scanline glow
+            ctx.globalAlpha = 0.12; ctx.fillStyle = fg; ctx.fillRect(dx, dy + row*cellY + cellY - 1, pix.w*cellX, 1); ctx.globalAlpha = 1;
+            row++;
+          }
+          if (row < pix.h) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+
+      function loadFromURL(url){
+        if (!url) return;
+        const img = new Image(); img.crossOrigin = 'anonymous'; img.onload = () => scanDraw(toMonoPixels(img)); img.src = url;
+      }
+      function loadFromFile(f){ const r = new FileReader(); r.onload = () => loadFromURL(r.result); r.readAsDataURL(f); }
+
+      pickBtn.addEventListener('click', () => fileInput.click());
+      fileInput.addEventListener('change', (e) => { const f = e.target.files[0]; if (f) loadFromFile(f); });
+      renderBtn.addEventListener('click', () => loadFromURL(urlInput.value.trim()));
+      rescanBtn.addEventListener('click', () => {
+        // rerender last if we still have canvas content by grabbing it back is hard; request user to click Render again
+        if (urlInput.value) loadFromURL(urlInput.value.trim());
+      });
+      ;['dragenter','dragover'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); }));
+      drop.addEventListener('drop', (e) => { e.preventDefault(); const f = e.dataTransfer.files[0]; if (f) loadFromFile(f); });
+
+      // ?img= support
+      const params = new URLSearchParams(location.search); const p = params.get('img'); if (p) { urlInput.value = p; loadFromURL(p); }
+    })();
+  </script>
+</body>
+</html>

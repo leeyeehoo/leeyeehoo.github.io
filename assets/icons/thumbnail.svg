@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#1e1e1e"/>
+  
+  <!-- Main panel -->
+  <rect x="60" y="60" width="1080" height="510" rx="20" fill="#2a2a2a" stroke="#a6e22e" stroke-width="4"/>
+  
+  <!-- Header area -->
+  <rect x="80" y="80" width="1040" height="80" fill="#1e1e1e" rx="8"/>
+  
+  <!-- Thumb/avatar in header -->
+  <rect x="100" y="100" width="40" height="40" rx="6" fill="#2a2a2a" stroke="#a6e22e" stroke-width="2"/>
+  <text x="120" y="125" dominant-baseline="middle" text-anchor="middle" 
+        font-family="Consolas, monospace" font-size="20" fill="#a6e22e" font-weight="bold">YL</text>
+  
+  <!-- Title text -->
+  <text x="160" y="125" dominant-baseline="middle" 
+        font-family="Consolas, monospace" font-size="28" fill="#a6e22e" font-weight="bold">yuhong li — console</text>
+  
+  <!-- Menu items -->
+  <rect x="100" y="200" width="1000" height="40" fill="#a6e22e"/>
+  <text x="120" y="225" dominant-baseline="middle" 
+        font-family="Consolas, monospace" font-size="18" fill="#1e1e1e">▸ Google Scholar</text>
+  
+  <text x="120" y="270" dominant-baseline="middle" 
+        font-family="Consolas, monospace" font-size="18" fill="#a6e22e">  LinkedIn</text>
+  
+  <text x="120" y="310" dominant-baseline="middle" 
+        font-family="Consolas, monospace" font-size="18" fill="#a6e22e">  GitHub</text>
+  
+  <text x="120" y="350" dominant-baseline="middle" 
+        font-family="Consolas, monospace" font-size="18" fill="#a6e22e">  Misc</text>
+  
+  <!-- Hint text -->
+  <text x="120" y="420" dominant-baseline="middle" 
+        font-family="Consolas, monospace" font-size="14" fill="#7fc114">↑/↓ to select • Enter to open</text>
+  
+  <!-- Decorative elements -->
+  <rect x="100" y="450" width="1000" height="1" fill="#2a2a2a"/>
+  
+  <!-- Terminal cursor -->
+  <rect x="1050" y="210" width="12" height="20" fill="#a6e22e" opacity="0.8"/>
+</svg>

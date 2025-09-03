@@ -1,0 +1,38 @@
+<!-- games/gallery/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gallery — console</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Console gallery with pixel scanning preview." />
+  <link rel="icon" type="image/svg+xml" href="../../assets/icons/favicon.svg">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <div class="hdr">
+      <div class="thumb">YL</div>
+      <div class="title">Gallery</div>
+    </div>
+    <div class="hint">Press <strong>B</strong> or <strong>Backspace</strong> to return • <a href="../../misc.html">← back to misc</a></div>
+    <div class="divider"></div>
+
+    <div class="canvas-box">
+      <canvas id="pxCanvas" aria-label="Pixel scanning preview"></canvas>
+    </div>
+    
+    <div class="info">
+      <div class="status" id="status">Loading cyberpunk scene...</div>
+      <div class="controls">
+        <button id="restartBtn" class="btn">Restart Scan</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
+
+

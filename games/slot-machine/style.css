@@ -1,0 +1,35 @@
+:root{
+  --bg:#0b0f10; --panel:#111518; --fg:#39ff14; --fg-dim:#9cff6b;
+}
+* { box-sizing: border-box; }
+html, body { margin:0; padding:0; background:var(--bg); color:var(--fg); font-family:Consolas, monospace; }
+.wrap { padding:12px 14px 24px; max-width:980px; margin:0 auto; }
+.hdr { display:flex; align-items:center; gap:10px; margin-bottom:10px; user-select:none; }
+.thumb { width:28px; height:28px; border-radius:4px; background:var(--panel); border:1px solid var(--fg); display:grid; place-items:center; font-weight:700; font-size:14px; color:var(--fg); }
+.title { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.hint { color:var(--fg); font-size:12px; margin:4px 0 12px; }
+.hint a { color:inherit; text-decoration:none; }
+.hint a:hover { text-decoration:underline; text-underline-offset:2px; }
+.divider { height:1px; background:var(--panel); margin:8px 0 12px; }
+
+.game { display:grid; gap:12px; justify-items:center; }
+.machine { position:relative; display:grid; gap:16px; padding:16px 16px 22px; background:var(--panel); border:1px solid var(--fg); border-radius:6px; }
+/* Pixel contour using multiple outlines */
+.machine::before, .machine::after { content:''; position:absolute; inset:0; pointer-events:none; border:1px solid var(--fg); }
+.machine::before { transform: translate(2px,2px); }
+.machine::after { transform: translate(4px,4px); opacity:0.6; }
+.reels { display:grid; grid-template-columns:repeat(3, minmax(64px, 1fr)); gap:12px; align-items:center; justify-items:center; }
+.reel { width:100%; max-width:160px; aspect-ratio:1/1; image-rendering: pixelated; background:var(--bg); border:1px solid var(--fg); border-radius:2px; }
+.panel { display:grid; grid-template-columns:1fr auto; gap:12px; align-items:center; margin-top:8px; }
+.credit { color:var(--fg); }
+.controls { display:flex; gap:8px; }
+.btn { background:transparent; color:var(--fg); border:1px solid var(--fg); padding:6px 10px; border-radius:4px; cursor:pointer; font-family:inherit; }
+.btn:disabled { opacity:0.5; cursor:not-allowed; }
+.status { color:var(--fg-dim); min-height:1.2em; }
+
+@media (max-width:600px){
+  .wrap{padding:10px;}
+  .hint{font-size:11px;}
+}
+
+
