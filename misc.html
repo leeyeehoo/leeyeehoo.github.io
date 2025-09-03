@@ -94,6 +94,23 @@
         it.setAttribute('aria-selected', i === idx ? 'true' : 'false');
       });
     };
+    // Mouse hover and touch interactions to move highlight
+    items.forEach((item, i) => {
+      item.addEventListener('mouseenter', () => {
+        if (i !== idx) {
+          idx = i;
+          update();
+        }
+      });
+      item.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        if (i !== idx) {
+          idx = i;
+          update();
+        }
+      }, { passive: false });
+    });
+    update();
     document.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowDown') { idx = (idx + 1) % items.length; update(); }
       else if (e.key === 'ArrowUp') { idx = (idx - 1 + items.length) % items.length; update(); }

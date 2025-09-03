@@ -160,6 +160,23 @@
         it.setAttribute('aria-selected', i === idx ? 'true' : 'false');
       });
     };
+    // Mouse hover interactions to move highlight
+    items.forEach((item, i) => {
+      item.addEventListener('mouseenter', () => {
+        if (i !== idx) {
+          idx = i;
+          update();
+        }
+      });
+      item.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        if (i !== idx) {
+          idx = i;
+          update();
+        }
+      }, { passive: false });
+    });
+    update();
     document.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowDown') {
         idx = (idx + 1) % items.length;
